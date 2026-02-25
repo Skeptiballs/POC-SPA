@@ -108,10 +108,18 @@ const RTZDisplay = (() => {
 
   /** Handle waypoint click from sidebar list. */
   function onWaypointClick(index) {
-    // Highlight active item
+    // Highlight active item in sidebar
     document.querySelectorAll('.wp-item').forEach(el => el.classList.remove('active'));
     const item = document.querySelector(`.wp-item[data-index="${index}"]`);
-    if (item) item.classList.add('active');
+    if (item) {
+      item.classList.add('active');
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Highlight active node on timeline
+    document.querySelectorAll('.tl-node').forEach(el => el.classList.remove('active'));
+    const tlNode = document.querySelector(`.tl-node[data-index="${index}"]`);
+    if (tlNode) tlNode.classList.add('active');
 
     // Open popup on map
     MapModule.openWaypointPopup(index);
@@ -195,10 +203,88 @@ const RTZDisplay = (() => {
     }
   }
 
+  /** Render the voyage timeline at the bottom of the map. */
+  function renderTimeline(routeData) {
+    const container = document.getElementById('voyage-timeline');
+    const track = document.getElementById('timeline-track');
+    const subtitle = document.getElementById('timeline-subtitle');
+    const waypoints = routeData.waypoints || [];
+
+    if (!waypoints || waypoints.length < 2) {
+      container.classList.remove('visible');
+      return;
+    }
+
+    // Calculate cumulative distances for proportional spacing
+    let cumDist = [0];
+    for (let i = 1; i < waypoints.length; i++) {
+      cumDist.push(cumDist[i - 1] + (waypoints[i].legDistanceNm || 0));
+    }
+    const totalDist = cumDist[cumDist.length - 1] || 1;
+
+    // Subtitle text
+    const info = routeData.routeInfo || {};
+    subtitle.textContent = `${info.vesselName || ''} — ${routeData.totalDistanceNm || 0} NM — ${waypoints.length} waypoints`;
+
+    // Clear existing nodes (keep the line)
+    track.querySelectorAll('.tl-node, .timeline-line-fill').forEach(el => el.remove());
+
+    // Add the gradient fill line
+    const fillLine = document.createElement('div');
+    fillLine.className = 'timeline-line-fill';
+    fillLine.style.width = '0%';
+    track.appendChild(fillLine);
+
+    // Add nodes
+    waypoints.forEach((wp, idx) => {
+      const pct = (cumDist[idx] / totalDist) * 100;
+      const isStart = idx === 0;
+      const isEnd = idx === waypoints.length - 1;
+
+      const node = document.createElement('div');
+      node.className = 'tl-node';
+      if (isStart) node.classList.add('tl-start');
+      if (isEnd) node.classList.add('tl-end');
+      node.dataset.index = idx;
+      node.style.left = `${pct}%`;
+      node.style.animationDelay = `${0.1 + idx * 0.04}s`;
+
+      const dot = document.createElement('div');
+      dot.className = 'tl-dot';
+
+      const labelTop = document.createElement('span');
+      labelTop.className = 'tl-label-top';
+      labelTop.textContent = wp.name;
+
+      const labelBottom = document.createElement('span');
+      labelBottom.className = 'tl-label-bottom';
+      labelBottom.textContent = wp.eta ? formatShortETA(wp.eta) : `${cumDist[idx].toFixed(0)} NM`;
+
+      node.appendChild(labelTop);
+      node.appendChild(dot);
+      node.appendChild(labelBottom);
+
+      node.addEventListener('click', () => {
+        onWaypointClick(idx);
+      });
+
+      track.appendChild(node);
+    });
+
+    // Animate the fill line in after a beat
+    requestAnimationFrame(() => {
+      container.classList.add('visible');
+      setTimeout(() => {
+        fillLine.style.width = '100%';
+      }, 200);
+    });
+  }
+
   return {
     renderVesselInfo,
     renderRouteSummary,
     renderWaypointList,
+    renderTimeline,
     renderMCSSEStatus,
     updateConnectionStatus,
     onWaypointClick,

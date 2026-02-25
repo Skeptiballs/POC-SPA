@@ -80,6 +80,7 @@ const App = (() => {
     RTZDisplay.renderWaypointList(data.waypoints, (idx) => {
       MapModule.openWaypointPopup(idx);
     });
+    RTZDisplay.renderTimeline(data);
     MapModule.renderRoute(data.waypoints, (idx) => {
       RTZDisplay.onWaypointClick(idx);
     });

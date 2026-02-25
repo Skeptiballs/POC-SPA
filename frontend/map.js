@@ -421,13 +421,20 @@ const MapModule = (() => {
     }
   }
 
-  /** Open the popup for a specific waypoint by index. */
+  /** Open the popup for a specific waypoint by index with smooth animation. */
   function openWaypointPopup(index) {
     const layers = markerLayer.getLayers();
     if (layers[index]) {
-      map.setView(layers[index].getLatLng(), map.getZoom());
-      layers[index].openPopup();
+      const latlng = layers[index].getLatLng();
+      const targetZoom = Math.max(map.getZoom(), 6);
+      map.flyTo(latlng, targetZoom, { duration: 0.8, easeLinearity: 0.4 });
+      setTimeout(() => layers[index].openPopup(), 400);
     }
+  }
+
+  /** Get the Leaflet map instance (for external modules). */
+  function getMap() {
+    return map;
   }
 
   return {
@@ -437,9 +444,10 @@ const MapModule = (() => {
     toggleXTD,
     renderRoute,
     openWaypointPopup,
+    getMap,
     startSimulation,
     pauseSimulation,
     resetSimulation,
-    setSpeedUpdateCallback
+    setSpeedUpdateCallback,
   };
 })();

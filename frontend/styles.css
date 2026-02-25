@@ -511,3 +511,310 @@ html, body {
   background: #e8eaef;
   border-color: var(--color-text-muted);
 }
+
+/* ============================================
+   Skeleton Loading Placeholders
+   ============================================ */
+
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eef1f5 25%, #e2e6ed 50%, #eef1f5 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #eef1f5 25%, #e2e6ed 50%, #eef1f5 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-circle.sm {
+  width: 10px;
+  height: 10px;
+}
+
+.skeleton-line.w30 { width: 30%; }
+.skeleton-line.w35 { width: 35%; }
+.skeleton-line.w40 { width: 40%; }
+.skeleton-line.w45 { width: 45%; }
+.skeleton-line.w50 { width: 50%; }
+.skeleton-line.w55 { width: 55%; }
+.skeleton-line.w60 { width: 60%; }
+.skeleton-line.w65 { width: 65%; }
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Card content fade-in animation
+   ============================================ */
+
+.card-body .info-row,
+.card-body .wp-item,
+.card-body .mcsse-status-row,
+.card-body .push-btn {
+  animation: fadeSlideIn 0.35s ease-out both;
+}
+
+.card-body .info-row:nth-child(1) { animation-delay: 0.03s; }
+.card-body .info-row:nth-child(2) { animation-delay: 0.06s; }
+.card-body .info-row:nth-child(3) { animation-delay: 0.09s; }
+.card-body .info-row:nth-child(4) { animation-delay: 0.12s; }
+.card-body .info-row:nth-child(5) { animation-delay: 0.15s; }
+.card-body .info-row:nth-child(6) { animation-delay: 0.18s; }
+.card-body .info-row:nth-child(7) { animation-delay: 0.21s; }
+
+.card-body .wp-item:nth-child(1)  { animation-delay: 0.02s; }
+.card-body .wp-item:nth-child(2)  { animation-delay: 0.04s; }
+.card-body .wp-item:nth-child(3)  { animation-delay: 0.06s; }
+.card-body .wp-item:nth-child(4)  { animation-delay: 0.08s; }
+.card-body .wp-item:nth-child(5)  { animation-delay: 0.10s; }
+.card-body .wp-item:nth-child(6)  { animation-delay: 0.12s; }
+.card-body .wp-item:nth-child(7)  { animation-delay: 0.14s; }
+.card-body .wp-item:nth-child(8)  { animation-delay: 0.16s; }
+.card-body .wp-item:nth-child(9)  { animation-delay: 0.18s; }
+.card-body .wp-item:nth-child(10) { animation-delay: 0.20s; }
+.card-body .wp-item:nth-child(11) { animation-delay: 0.22s; }
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Waypoint marker hover effects
+   ============================================ */
+
+.wp-marker-icon {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wp-marker-icon:hover {
+  transform: scale(1.25);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+}
+
+/* ============================================
+   Voyage Timeline
+   ============================================ */
+
+#voyage-timeline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+  padding: 10px 20px 14px 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#voyage-timeline.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.timeline-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+}
+
+.timeline-subtitle {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.timeline-track-wrapper {
+  position: relative;
+  padding: 0 16px;
+}
+
+.timeline-track {
+  position: relative;
+  height: 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-border);
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.timeline-line-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: width 0.6s ease;
+}
+
+/* Timeline waypoint nodes */
+.tl-node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.tl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2.5px solid var(--color-primary);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tl-node:hover .tl-dot,
+.tl-node.active .tl-dot {
+  background: var(--color-primary);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.15);
+}
+
+.tl-node.tl-start .tl-dot {
+  width: 14px;
+  height: 14px;
+  border-color: #2ecc71;
+  background: #2ecc71;
+}
+
+.tl-node.tl-end .tl-dot {
+  width: 14px;
+  height: 14px;
+  border-color: #e74c3c;
+  background: #e74c3c;
+}
+
+.tl-node.tl-start:hover .tl-dot,
+.tl-node.tl-start.active .tl-dot {
+  background: #2ecc71;
+  box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
+}
+
+.tl-node.tl-end:hover .tl-dot,
+.tl-node.tl-end.active .tl-dot {
+  background: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
+}
+
+.tl-label-top {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.tl-label-bottom {
+  position: absolute;
+  top: calc(100% + 4px);
+  font-size: 9px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.tl-node:hover .tl-label-top,
+.tl-node:hover .tl-label-bottom,
+.tl-node.active .tl-label-top,
+.tl-node.active .tl-label-bottom,
+.tl-node.tl-start .tl-label-top,
+.tl-node.tl-start .tl-label-bottom,
+.tl-node.tl-end .tl-label-top,
+.tl-node.tl-end .tl-label-bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animate nodes appearing sequentially */
+.tl-node {
+  animation: timelineNodeIn 0.3s ease-out both;
+}
+
+@keyframes timelineNodeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ============================================
+   Smooth scroll for sidebar waypoint highlight
+   ============================================ */
+
+#waypoint-list {
+  scroll-behavior: smooth;
+}
+
+/* Map needs room for timeline */
+#map {
+  height: calc(100% - 74px);
+}
