@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<route version="1.1" xmlns="http://www.cirm.org/RTZ/1/1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <routeInfo routeName="Elder Leader - Yokohama to Singapore"
+             routeAuthor="Furuno ECDIS"
+             routeStatus="Planned"
+             vesselName="Elder Leader"
+             vesselMMSI="431000001"
+             vesselIMO="9876543"
+             vesselVoyage="EL-2026-04-SIN"
+             validityPeriodStart="2026-04-20T00:00:00Z"
+             validityPeriodStop="2026-05-01T23:59:59Z"/>
+  <waypoints>
+    <defaultWaypoint radius="0.50">
+      <leg speedMax="18.0" portsideXTD="0.30" starboardXTD="0.30"
+           geometryType="Loxodrome"/>
+    </defaultWaypoint>
+    <!-- Departure: Yokohama -->
+    <waypoint id="1" revision="0" name="YOK_PILOT_STN">
+      <position lat="35.4437" lon="139.6380"/>
+      <leg speedMax="12.0" portsideXTD="0.20" starboardXTD="0.20"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Tokyo Bay exit -->
+    <waypoint id="2" revision="0" name="URAGA_CHANNEL">
+      <position lat="35.2200" lon="139.7300"/>
+      <leg speedMax="14.0" portsideXTD="0.30" starboardXTD="0.30"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Pacific Ocean waypoint -->
+    <waypoint id="3" revision="0" name="WP_PACIFIC_01">
+      <position lat="33.0000" lon="138.0000"/>
+      <leg speedMax="18.0" portsideXTD="1.00" starboardXTD="1.00"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- South of Kyushu -->
+    <waypoint id="4" revision="0" name="WP_KYUSHU_S">
+      <position lat="30.5000" lon="131.5000"/>
+      <leg speedMax="18.0" portsideXTD="1.00" starboardXTD="1.00"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- East China Sea -->
+    <waypoint id="5" revision="0" name="WP_ECS_01">
+      <position lat="26.0000" lon="125.5000"/>
+      <leg speedMax="18.0" portsideXTD="1.00" starboardXTD="1.00"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- South China Sea entry -->
+    <waypoint id="6" revision="0" name="WP_SCS_ENTRY">
+      <position lat="20.0000" lon="118.0000"/>
+      <leg speedMax="17.0" portsideXTD="0.80" starboardXTD="0.80"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- South China Sea mid -->
+    <waypoint id="7" revision="0" name="WP_SCS_MID">
+      <position lat="12.0000" lon="112.0000"/>
+      <leg speedMax="17.0" portsideXTD="0.80" starboardXTD="0.80"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Approach Singapore Strait -->
+    <waypoint id="8" revision="0" name="WP_SINSTR_APP">
+      <position lat="3.5000" lon="105.5000"/>
+      <leg speedMax="14.0" portsideXTD="0.30" starboardXTD="0.30"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Singapore Strait TSS East entrance -->
+    <waypoint id="9" revision="0" name="SINSTR_TSS_E">
+      <position lat="1.3500" lon="104.4000"/>
+      <leg speedMax="12.0" portsideXTD="0.20" starboardXTD="0.20"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Singapore VTS reporting point -->
+    <waypoint id="10" revision="0" name="SIN_VTMS_RPT">
+      <position lat="1.2700" lon="103.9800"/>
+      <leg speedMax="10.0" portsideXTD="0.15" starboardXTD="0.15"
+           geometryType="Loxodrome"/>
+    </waypoint>
+    <!-- Singapore anchorage / pilot boarding -->
+    <waypoint id="11" revision="0" name="SIN_PILOT_BRD">
+      <position lat="1.2300" lon="103.8500"/>
+      <leg speedMax="8.0" portsideXTD="0.10" starboardXTD="0.10"
+           geometryType="Loxodrome"/>
+    </waypoint>
+  </waypoints>
+  <schedules>
+    <schedule id="1" name="Base Schedule">
+      <calculated>
+        <scheduleElement waypointId="1" eta="2026-04-20T06:00:00Z"/>
+        <scheduleElement waypointId="5" eta="2026-04-23T14:00:00Z"/>
+        <scheduleElement waypointId="8" eta="2026-04-26T20:00:00Z"/>
+        <scheduleElement waypointId="9" eta="2026-04-27T08:00:00Z"/>
+        <scheduleElement waypointId="10" eta="2026-04-27T10:30:00Z"/>
+        <scheduleElement waypointId="11" eta="2026-04-27T12:00:00Z"/>
+      </calculated>
+    </schedule>
+  </schedules>
+</route>
