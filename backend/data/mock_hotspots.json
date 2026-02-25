@@ -1,0 +1,92 @@
+{
+  "hotspots": [
+    {
+      "id": "HS-SINSTR-TSS-E",
+      "name": "Singapore Strait TSS — Eastbound Approach",
+      "type": "high_traffic_density",
+      "severity": "high",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.20, 1.20], [104.50, 1.20], [104.50, 1.40], [104.20, 1.40], [104.20, 1.20]]]
+      },
+      "metadata": {
+        "avg_vessels_per_hour": 47,
+        "peak_hours_utc": ["06:00-10:00", "14:00-18:00"],
+        "dominant_vessel_types": ["Container", "Bulk Carrier", "Tanker"],
+        "historical_incident_rate": "elevated",
+        "notes": "Major TSS convergence point. Frequent crossing traffic from Eastern Working Anchorage. VTSO attention typically required."
+      }
+    },
+    {
+      "id": "HS-SINSTR-ANCHOR-E",
+      "name": "Eastern Working Anchorage Approaches",
+      "type": "crossing_traffic",
+      "severity": "medium",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[103.90, 1.22], [104.10, 1.22], [104.10, 1.35], [103.90, 1.35], [103.90, 1.22]]]
+      },
+      "metadata": {
+        "avg_vessels_per_hour": 18,
+        "peak_hours_utc": ["08:00-12:00"],
+        "dominant_vessel_types": ["Tanker", "Bulk Carrier"],
+        "historical_incident_rate": "moderate",
+        "notes": "Vessels departing anchorage cross eastbound TSS lane. Unpredictable maneuvering patterns."
+      }
+    },
+    {
+      "id": "HS-SINSTR-PILOT",
+      "name": "Singapore Pilot Boarding Area",
+      "type": "congestion",
+      "severity": "medium",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[103.80, 1.20], [103.90, 1.20], [103.90, 1.28], [103.80, 1.28], [103.80, 1.20]]]
+      },
+      "metadata": {
+        "avg_vessels_per_hour": 12,
+        "peak_hours_utc": ["06:00-09:00", "17:00-20:00"],
+        "dominant_vessel_types": ["All types"],
+        "historical_incident_rate": "low",
+        "notes": "Vessels reducing speed and maneuvering for pilot embarkation. Close quarters situations common during peak hours."
+      }
+    },
+    {
+      "id": "HS-SCS-FISHING",
+      "name": "South China Sea Fishing Zone",
+      "type": "fishing_activity",
+      "severity": "low",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[110.00, 10.00], [114.00, 10.00], [114.00, 14.00], [110.00, 14.00], [110.00, 10.00]]]
+      },
+      "metadata": {
+        "avg_vessels_per_hour": 8,
+        "peak_hours_utc": ["00:00-06:00"],
+        "dominant_vessel_types": ["Fishing"],
+        "historical_incident_rate": "low",
+        "notes": "Scattered fishing vessel activity. Vessels may not respond to AIS or VHF. Maintain visual watch."
+      }
+    },
+    {
+      "id": "HS-SINSTR-RAFFLES",
+      "name": "Raffles Lighthouse — Traffic Convergence",
+      "type": "high_traffic_density",
+      "severity": "high",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[103.70, 1.15], [103.85, 1.15], [103.85, 1.25], [103.70, 1.25], [103.70, 1.15]]]
+      },
+      "metadata": {
+        "avg_vessels_per_hour": 52,
+        "peak_hours_utc": ["07:00-11:00", "15:00-19:00"],
+        "dominant_vessel_types": ["Container", "Tanker", "Bulk Carrier", "Passenger"],
+        "historical_incident_rate": "elevated",
+        "notes": "Convergence of westbound and eastbound TSS lanes with Singapore port traffic. One of the densest maritime traffic points globally."
+      }
+    }
+  ],
+  "data_source": "MSG Historical AIS Analytics",
+  "data_period": "2025-01 to 2025-12",
+  "last_updated": "2026-03-15T00:00:00Z"
+}
