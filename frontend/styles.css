@@ -1,0 +1,462 @@
+/* MASS Route Display — Stylesheet
+   Clean, modern maritime UI for demo presentation */
+
+:root {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-primary: #0077b6;
+  --color-primary-dark: #005f8a;
+  --color-primary-light: #90e0ef;
+  --color-accent: #00b4d8;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #5a6175;
+  --color-text-muted: #8e95a5;
+  --color-border: #e2e6ed;
+  --color-success: #2ecc71;
+  --color-warning: #f39c12;
+  --color-route: #0077b6;
+  --sidebar-width: 360px;
+  --header-height: 56px;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+/* Header */
+#header {
+  height: var(--header-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-mark {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  padding: 4px 10px;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+}
+
+#header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Status badges */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: #f0f2f5;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.status-file .status-dot { background: var(--color-success); }
+.status-connected .status-dot { background: var(--color-success); }
+.status-error .status-dot { background: #e74c3c; }
+.status-cached .status-dot { background: var(--color-warning); }
+
+/* Main layout */
+#app {
+  display: flex;
+  height: calc(100vh - var(--header-height));
+}
+
+/* Sidebar */
+#sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* Cards */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+}
+
+.card-body {
+  padding: 14px 16px;
+}
+
+/* Info rows */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  min-width: 90px;
+}
+
+.info-value {
+  font-size: 13px;
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: right;
+  word-break: break-word;
+}
+
+.info-value.highlight {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.info-placeholder {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Waypoint list */
+.wp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.wp-item:hover {
+  background: #f0f7ff;
+}
+
+.wp-item.active {
+  background: #e3f0fb;
+}
+
+.wp-item:last-child {
+  border-bottom: none;
+}
+
+.wp-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wp-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.wp-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wp-meta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.wp-eta {
+  font-size: 11px;
+  color: var(--color-primary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* Map container */
+#map-container {
+  flex: 1;
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Map controls overlay */
+#map-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 800;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.map-toggle input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  min-width: 220px;
+}
+
+.wp-popup {
+  padding: 14px 16px;
+}
+
+.wp-popup-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-primary-light);
+}
+
+.wp-popup .info-row {
+  padding: 4px 0;
+}
+
+.wp-popup .info-label {
+  font-size: 11px;
+}
+
+.wp-popup .info-value {
+  font-size: 12px;
+}
+
+/* Custom waypoint marker */
+.wp-marker-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  border: 2.5px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  line-height: 1;
+}
+
+.wp-marker-icon.wp-start {
+  background: #2ecc71;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.wp-marker-icon.wp-end {
+  background: #e74c3c;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+/* Waypoint label tooltip */
+.wp-label {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white;
+  white-space: nowrap;
+}
+
+/* Upload button */
+.upload-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+  width: 100%;
+}
+
+.upload-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.upload-status {
+  display: block;
+  font-size: 11px;
+  margin-top: 6px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.upload-status.success { color: var(--color-success); }
+.upload-status.error { color: #e74c3c; }
+
+/* MCSSE status */
+.mcsse-status-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.mcsse-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mcsse-status-dot.dry-run { background: var(--color-warning); }
+.mcsse-status-dot.connected { background: var(--color-success); }
+.mcsse-status-dot.error { background: #e74c3c; }
+.mcsse-status-dot.pending { background: var(--color-text-muted); }
+
+.push-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  background: #f0f2f5;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+  text-align: center;
+  font-family: inherit;
+}
+
+.push-btn:hover {
+  background: #e8eaef;
+  border-color: var(--color-text-muted);
+}

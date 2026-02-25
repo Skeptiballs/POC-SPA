@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MASS Route Display — Elder Leader</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+
+  <!-- Inter font for a clean, modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+  <!-- Header bar -->
+  <header id="header">
+    <div class="header-left">
+      <div class="logo-mark">TIDALIS</div>
+      <div class="header-divider"></div>
+      <h1>MASS Route Display</h1>
+    </div>
+    <div class="header-right">
+      <div id="connection-status" class="status-badge status-file">
+        <span class="status-dot"></span>
+        <span id="status-text">Loading...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main layout -->
+  <div id="app">
+    <!-- Sidebar / Info Panel -->
+    <aside id="sidebar">
+      <!-- Vessel info card -->
+      <div class="card" id="vessel-card">
+        <div class="card-header">
+          <h2>Vessel Information</h2>
+        </div>
+        <div class="card-body" id="vessel-info">
+          <div class="info-placeholder">Loading route data...</div>
+        </div>
+      </div>
+
+      <!-- Route summary card -->
+      <div class="card" id="route-card">
+        <div class="card-header">
+          <h2>Route Summary</h2>
+        </div>
+        <div class="card-body" id="route-info">
+          <div class="info-placeholder">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Waypoint list card -->
+      <div class="card" id="waypoint-card">
+        <div class="card-header">
+          <h2>Waypoints</h2>
+        </div>
+        <div class="card-body" id="waypoint-list">
+          <div class="info-placeholder">Loading...</div>
+        </div>
+      </div>
+
+      <!-- MCSSE status card -->
+      <div class="card" id="mcsse-card">
+        <div class="card-header">
+          <h2>MCSSE Bridge</h2>
+        </div>
+        <div class="card-body" id="mcsse-info">
+          <div class="info-placeholder">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Upload RTZ -->
+      <div class="card" id="upload-card">
+        <div class="card-header">
+          <h2>Load RTZ File</h2>
+        </div>
+        <div class="card-body">
+          <label class="upload-btn" for="rtz-upload">
+            Choose RTZ File
+          </label>
+          <input type="file" id="rtz-upload" accept=".rtz,.xml" style="display:none">
+          <span id="upload-status" class="upload-status"></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Map container -->
+    <main id="map-container">
+      <div id="map"></div>
+
+      <!-- Map layer controls -->
+      <div id="map-controls">
+        <label class="map-toggle" title="Show nautical chart overlay">
+          <input type="checkbox" id="toggle-seamark"> OpenSeaMap
+        </label>
+        <label class="map-toggle" title="Show waypoint labels on map">
+          <input type="checkbox" id="toggle-labels" checked> Labels
+        </label>
+      </div>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+  <script src="/static/map.js"></script>
+  <script src="/static/rtz_display.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
