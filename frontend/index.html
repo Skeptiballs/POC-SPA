@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link rel="stylesheet" href="/static/styles.css">
 </head>
@@ -99,12 +102,34 @@
 
       <!-- Map layer controls -->
       <div id="map-controls">
-        <label class="map-toggle" title="Show nautical chart overlay">
-          <input type="checkbox" id="toggle-seamark"> OpenSeaMap
-        </label>
-        <label class="map-toggle" title="Show waypoint labels on map">
-          <input type="checkbox" id="toggle-labels" checked> Labels
-        </label>
+        <div class="control-group">
+          <label class="map-toggle" title="Show nautical chart overlay">
+            <input type="checkbox" id="toggle-seamark"> OpenSeaMap
+          </label>
+          <label class="map-toggle" title="Show waypoint labels on map">
+            <input type="checkbox" id="toggle-labels" checked> Labels
+          </label>
+          <label class="map-toggle" title="Show safety corridor">
+            <input type="checkbox" id="toggle-xtd" checked> Safety Corridor
+          </label>
+        </div>
+        
+        <div class="control-divider"></div>
+        
+        <div class="control-group playback-controls">
+          <button id="btn-play" class="icon-btn" title="Play Simulation">
+            <span class="material-icons">play_arrow</span>
+          </button>
+          <button id="btn-pause" class="icon-btn" title="Pause Simulation" style="display:none">
+            <span class="material-icons">pause</span>
+          </button>
+          <button id="btn-reset" class="icon-btn" title="Reset Simulation">
+            <span class="material-icons">replay</span>
+          </button>
+          <div class="speed-readout">
+            <span id="sim-speed">0.0</span> kn
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -113,6 +138,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+    
+  <!-- Turf.js for geospatial calculations -->
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
   <script src="/static/map.js"></script>
   <script src="/static/rtz_display.js"></script>

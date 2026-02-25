@@ -290,7 +290,58 @@ html, body {
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0;
+}
+
+.playback-controls {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.icon-btn:hover {
+  background: var(--color-bg);
+}
+
+.icon-btn .material-icons {
+  font-size: 24px;
+}
+
+.speed-readout {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-left: auto;
+  min-width: 50px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .map-toggle {

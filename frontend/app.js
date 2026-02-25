@@ -19,6 +19,39 @@ const App = (() => {
       MapModule.toggleLabels(e.target.checked);
     });
 
+    document.getElementById('toggle-xtd').addEventListener('change', (e) => {
+      MapModule.toggleXTD(e.target.checked);
+    });
+
+    // Simulation controls
+    const btnPlay = document.getElementById('btn-play');
+    const btnPause = document.getElementById('btn-pause');
+    const btnReset = document.getElementById('btn-reset');
+    const speedEl = document.getElementById('sim-speed');
+
+    btnPlay.addEventListener('click', () => {
+      MapModule.startSimulation();
+      btnPlay.style.display = 'none';
+      btnPause.style.display = 'flex';
+    });
+
+    btnPause.addEventListener('click', () => {
+      MapModule.pauseSimulation();
+      btnPause.style.display = 'none';
+      btnPlay.style.display = 'flex';
+    });
+
+    btnReset.addEventListener('click', () => {
+      MapModule.resetSimulation();
+      btnPause.style.display = 'none';
+      btnPlay.style.display = 'flex';
+      speedEl.textContent = '0.0';
+    });
+
+    MapModule.setSpeedUpdateCallback((speed) => {
+      speedEl.textContent = speed.toFixed(1);
+    });
+
     // Wire up file upload
     document.getElementById('rtz-upload').addEventListener('change', handleFileUpload);
 
