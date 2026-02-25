@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MASS Route Display — Elder Leader</title>
+  <title>MASS Route Intelligence — Elder Leader</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -27,9 +27,13 @@
     <div class="header-left">
       <div class="logo-mark">TIDALIS</div>
       <div class="header-divider"></div>
-      <h1>MASS Route Display</h1>
+      <h1>MASS Route Intelligence</h1>
     </div>
     <div class="header-right">
+      <div id="intelligence-badge" class="intelligence-badge" style="display:none">
+        <span class="material-icons" style="font-size:14px">analytics</span>
+        <span id="intelligence-text">Analysing route...</span>
+      </div>
       <div id="connection-status" class="status-badge status-file">
         <span class="status-dot"></span>
         <span id="status-text">Loading...</span>
@@ -41,6 +45,7 @@
   <div id="app">
     <!-- Sidebar / Info Panel -->
     <aside id="sidebar">
+
       <!-- Vessel info card -->
       <div class="card" id="vessel-card">
         <div class="card-header">
@@ -48,6 +53,28 @@
         </div>
         <div class="card-body" id="vessel-info">
           <div class="info-placeholder">Loading route data...</div>
+        </div>
+      </div>
+
+      <!-- Route Risk Summary card (Phase 2) -->
+      <div class="card" id="risk-card" style="display:none">
+        <div class="card-header card-header-flex">
+          <h2>Route Risk Summary</h2>
+          <div id="overall-risk-badge" class="risk-badge risk-low">LOW</div>
+        </div>
+        <div class="card-body" id="risk-summary">
+          <div class="info-placeholder">Analysing...</div>
+        </div>
+      </div>
+
+      <!-- Advisories card (Phase 2) -->
+      <div class="card" id="advisory-card" style="display:none">
+        <div class="card-header card-header-flex">
+          <h2>Shore Advisories</h2>
+          <span id="advisory-count-badge" class="advisory-count-badge">0</span>
+        </div>
+        <div class="card-body card-body-flush" id="advisory-list">
+          <div class="info-placeholder" style="padding:14px 16px">Analysing route...</div>
         </div>
       </div>
 
@@ -94,6 +121,18 @@
           <span id="upload-status" class="upload-status"></span>
         </div>
       </div>
+
+      <!-- Transmission Log card (Phase 2) -->
+      <div class="card" id="txlog-card" style="display:none">
+        <div class="card-header card-header-flex" style="cursor:pointer" onclick="RTZDisplay.toggleTransmissionLog()">
+          <h2>Message Log</h2>
+          <span class="material-icons toggle-icon" id="txlog-toggle-icon" style="font-size:18px;color:var(--color-text-muted)">expand_more</span>
+        </div>
+        <div class="card-body card-body-flush" id="transmission-log" style="display:none">
+          <div class="info-placeholder" style="padding:10px 16px">No messages queued.</div>
+        </div>
+      </div>
+
     </aside>
 
     <!-- Map container -->
@@ -106,6 +145,9 @@
           <label class="map-toggle" title="Show nautical chart overlay">
             <input type="checkbox" id="toggle-seamark"> OpenSeaMap
           </label>
+          <label class="map-toggle" title="Show hotspot zones on map">
+            <input type="checkbox" id="toggle-hotspots" checked> Hotspot Zones
+          </label>
           <label class="map-toggle" title="Show waypoint labels on map">
             <input type="checkbox" id="toggle-labels" checked> Labels
           </label>
@@ -113,9 +155,9 @@
             <input type="checkbox" id="toggle-xtd" checked> Safety Corridor
           </label>
         </div>
-        
+
         <div class="control-divider"></div>
-        
+
         <div class="control-group playback-controls">
           <button id="btn-play" class="icon-btn" title="Play Simulation">
             <span class="material-icons">play_arrow</span>
@@ -134,11 +176,33 @@
     </main>
   </div>
 
+  <!-- Footer bar -->
+  <footer id="app-footer">
+    <span id="footer-datasource">Data: MSG Historical AIS Analytics</span>
+    <span class="footer-sep">|</span>
+    <span id="footer-updated">Last updated: —</span>
+    <span class="footer-sep">|</span>
+    <span id="footer-status">Connecting...</span>
+  </footer>
+
+  <!-- Transmit Advisory Modal -->
+  <div id="transmit-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="material-icons" style="color:var(--color-success);font-size:20px">check_circle</span>
+        <strong>Advisory Queued for Transmission</strong>
+      </div>
+      <p id="transmit-modal-msg" class="modal-body-text"></p>
+      <p class="modal-note">Two-way Furuno Cloud integration pending. Advisory will be delivered automatically once the return channel is active.</p>
+      <button class="modal-close-btn" onclick="document.getElementById('transmit-modal').style.display='none'">Close</button>
+    </div>
+  </div>
+
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
-    
+
   <!-- Turf.js for geospatial calculations -->
   <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
